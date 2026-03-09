@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Will You Be My Friend?</title>
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+    overflow:hidden;
+}
+
+.container{
+    text-align:center;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
+    animation: pop 0.6s ease;
+}
+
+@keyframes pop{
+    from{transform:scale(0.7); opacity:0;}
+    to{transform:scale(1); opacity:1;}
+}
+
+h1{
+    font-size:32px;
+}
+
+input{
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    font-size:16px;
+}
+
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    margin:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+#yes{
+    background:#ff4d6d;
+    color:white;
+}
+
+#yes:hover{
+    transform:scale(1.1);
+}
+
+#no{
+    background:#ccc;
+    position:absolute;
+}
+
+.heart{
+    position:absolute;
+    font-size:25px;
+    animation: float 3s linear infinite;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(0);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-800px);
+        opacity:0;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Say Hi First 👋</h1>
+
+<input id="hiInput" placeholder="Type hi...">
+
+<br><br>
+
+<button onclick="checkHi()">Submit</button>
+
+<div id="question" style="display:none">
+
+<h1>Will you be my friend? 🥺</h1>
+
+<button id="yes" onclick="yesClicked()">Yes 💖</button>
+<button id="no" onmouseover="moveNo()">No 😈</button>
+
+</div>
+
+</div>
+
+<script>
+
+function checkHi(){
+    let text=document.getElementById("hiInput").value.toLowerCase()
+
+    if(text==="hi"){
+        document.getElementById("question").style.display="block"
+    }else{
+        alert("You must say hi first 😌")
+    }
+}
+
+function moveNo(){
+
+    let btn=document.getElementById("no")
+
+    let x=Math.random()*window.innerWidth
+    let y=Math.random()*window.innerHeight
+
+    btn.style.left=x+"px"
+    btn.style.top=y+"px"
+
+}
+
+function yesClicked(){
+
+    document.body.innerHTML="<h1 style='font-size:50px'>YAYYY!! We are friends now 💖🥳</h1>"
+
+    setInterval(createHeart,200)
+
+}
+
+function createHeart(){
+
+    let heart=document.createElement("div")
+
+    heart.className="heart"
+    heart.innerHTML="💖"
+
+    heart.style.left=Math.random()*window.innerWidth+"px"
+    heart.style.top=window.innerHeight+"px"
+
+    document.body.appendChild(heart)
+
+    setTimeout(()=>heart.remove(),3000)
+
+}
+
+</script>
+
+</body>
+</html>
